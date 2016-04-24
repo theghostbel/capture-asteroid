@@ -179,6 +179,7 @@ document.addEventListener("keydown", function (event) {
 //        event.preventDefault();
 });
 
+
 document.addEventListener('mousewheel', function (event) {
   above_cam.position.z += event.wheelDelta;
 });
@@ -192,6 +193,21 @@ document.addEventListener('click', function (event) {
   })
 });
 
+
+document.addEventListener('click', function (event) {
+  if (event.target.className !== 'draw-line') return;
+  var material = new THREE.LineBasicMaterial({
+    color: 0xFF00FF
+  });
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push(new THREE.Vector3(0, 0, 0));
+  geometry.vertices.push(new THREE.Vector3(200, 200, 0));
+
+  var line = new THREE.Line(geometry, material);
+  scene.add(line);
+
+  console.log(line)
+});
 
 function changeCamera() {
   if (camera == above_cam) camera = earth_cam;
@@ -223,9 +239,4 @@ $(function() {
     $('.screen').fadeOut(500)
     $('.why-you-need').fadeIn(500)
   });
-});
-document.addEventListener('click', function (event) {
-  if (event.target.className !== 'why-you-need') return;
-
-  document.querySelectorAll()
 });

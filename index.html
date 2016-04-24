@@ -1,71 +1,70 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        html {
-            height: 100%;
-            width: 100%;
-        }
+    <title>Order Asteroid</title>
 
-        body {
-            height: 100%;
-            width: 100%;
-            position: relative;
-            color: white;
-        }
-
-        .order-button {
-            cursor: pointer;
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-
-            border: 1px solid #26759E;
-            box-shadow: #FEFFFF 0px 1px 3px inset;
-            border-radius: 7px;
-            font-size: 45px;
-            font-family: comic sans, comic sans ms, sans-serif;
-            padding: 10px 10px 10px 10px;
-            text-decoration: none;
-            display: inline-block;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-            font-weight: bold;
-            color: #05142E;
-            background: #3093C7 linear-gradient(to bottom, #3093C7, #1C5A85);
-        }
-
-        .order-button:hover {
-            background: #3093C7 linear-gradient(to bottom, #33b1f0, #2686c4);
-        }
-
-        .why-you-need {
-            display: none;
-        }
-    </style>
+    <link type="text/css" href="./css/bootstrap.css" rel="stylesheet"/>
+    <link type="text/css" href="./css/sb-admin-2.css" rel="stylesheet"/>
+    <link type="text/css" href="./css/timeline.css" rel="stylesheet"/>
+    <link type="text/css" href="./css/metisMenu.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
-<body lang="en">
-<div class="order-button">Order asteroid</div>
-<p style="color: white">Day# <span id="day"></span></p>
+<style>
+    html {
+        height: 100%;
+        width: 100%;
+    }
+    body {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        color: white;
+    }
+    .height100 { height: 100%;}
+</style>
 
-<button id="cheap">Cheap</button>
 
-<div class="why-you-need screen">
-    <h3>Select asteroid purpose:</h3>
-    <ol>
-        <li>Platinum, Nikel, Palladium</li>
-        <li>Fuel: H<sub>2</sub>0, Methane, Ammonia</li>
-        <li>Terraforming of Mars</li>
-        <li>Orbit station</li>
-        <li>Far orbit fuel station</li>
-    </ol>
+<body>
+<div class="container-fluid height100">
+    <div class="row height100">
+        <div class="col-md-3">
+            <p style="color: white">Day# <span id="day"></span></p>
+            <div class="sidebar-nav">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="#">Select asteroid purpose<span class="fa arrow"></span></a>
+
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#"> Platinum, Nikel, Palladium</a>
+                            </li>
+                            <li>
+                                <a href="#">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
+                            </li>
+                            <li>
+                                <a href="#">Terraforming of Mars</a>
+                            </li>
+                            <li>
+                                <a href="#">Orbit station</a>
+                            </li>
+                            <li>
+                                <a href="#">Far orbit fuel station</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 height100">
+            <div style="height: 100%; width: 100%;" id="container" class="screen"></div>
+        </div>
+    </div>
 </div>
-
-<div style="height: 90%; width: 100%;" id="container" class="screen"></div>
-
 <script src="./jquery-2.2.3.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/metisMenu.js"></script>
+<script src="./js/sb-admin-2.js"></script>
+
 <script src="./underscore.js"></script>
 <script src="./moment.min.js"></script>
 <script src="./three.js"></script>
@@ -74,4 +73,3 @@
 <!-- main logic -->
 <script src="./orbit.js"></script>
 </body>
-</html>
