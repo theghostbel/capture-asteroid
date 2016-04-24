@@ -1,5 +1,6 @@
 // This is where stuff in our game will happen:
 var scene = new THREE.Scene();
+var focusedItemXY = {x: 0, y: 0};
 
 var renderer = new THREE.WebGLRenderer();
 // This is what sees the stuff:
@@ -20,8 +21,8 @@ container.appendChild(renderer.domElement);
 // ******** START CODING ON THE NEXT LINE ********
 document.body.style.backgroundColor = 'black';
 
-var surface = new THREE.MeshPhongMaterial({color: 0xFFD700});
-var star = new THREE.SphereGeometry(50, 28, 21);
+var surface = new THREE.MeshPhongMaterial({ color: 0xFFD700 });
+var star = new THREE.SphereGeometry(getPlanetSize(fixedPlanets.sun.sizeR / 500), 28, 21);
 var sun = new THREE.Mesh(star, surface);
 scene.add(sun);
 
@@ -49,13 +50,12 @@ asteroids.forEach(function (asteroid) {
 console.log(asteroidsIds)
 
 var surfaceMars = new THREE.MeshPhongMaterial({color: 0xFF1111});
-var marsGeo = new THREE.SphereGeometry(20, 20, 15);
+var marsGeo = new THREE.SphereGeometry(getPlanetSize(fixedPlanets.mars.sizeR), 20, 15);
 var mars = new THREE.Mesh(marsGeo, surfaceMars);
-//    mars.position.set(500 * Math.cos(1 / nrOfPlanets * 1 * 3.14 * 2), 500 * Math.sin(1 / nrOfPlanets * 1 * 3.14 * 2), 0);
 scene.add(mars);
 
 var surfacePhobos = new THREE.MeshPhongMaterial({color: 0xffffff});
-var phobos = new THREE.SphereGeometry(10, 30, 25);
+var phobos = new THREE.SphereGeometry(6, 30, 25);
 var phobos = new THREE.Mesh(phobos, surfacePhobos);
 
 var phobos_orbit = new THREE.Object3D();
@@ -63,9 +63,8 @@ phobos_orbit.add(phobos);
 phobos.position.set(0, 50, 0);
 
 var surfaceDeimos = new THREE.MeshPhongMaterial({color: 0xffffff});
-var deimos = new THREE.SphereGeometry(20, 30, 25);
+var deimos = new THREE.SphereGeometry(12, 30, 25);
 var deimos = new THREE.Mesh(deimos, surfaceDeimos);
-
 var deimos_orbit = new THREE.Object3D();
 deimos_orbit.add(deimos);
 deimos.position.set(0, -50, 0);
@@ -74,24 +73,24 @@ mars.add(phobos_orbit);
 mars.add(deimos_orbit);
 
 var surface = new THREE.MeshPhongMaterial({color: 0x0000cd});
-var planet = new THREE.SphereGeometry(20, 20, 15);
+var planet = new THREE.SphereGeometry(earthPXSizeR, 20, 15);
 var earth = new THREE.Mesh(planet, surface);
-earth.position.set(250, 0, 0);
 scene.add(earth);
 
-var surface = new THREE.MeshPhongMaterial({color: 0xDDDDDD});
+var surface = new THREE.MeshPhongMaterial({ color: 0xDDDDDD });
 var planet = new THREE.SphereGeometry(15, 30, 25);
 var moon = new THREE.Mesh(planet, surface);
 
 var moon_orbit = new THREE.Object3D();
 earth.add(moon_orbit);
 moon_orbit.add(moon);
-moon.position.set(0, 100, 0);
+moon.position.set(0, getPXfromAU(fixedPlanets.moon.orbitR * 50), 0);
 earth_cam.rotation.set(Math.PI / 2, 0, 0);
 moon_orbit.add(earth_cam);
 
 var time = 0,
   speed = 1,
+  direction = 1,
   pause = false;
 var dayNo = document.getElementById('day');
 var date = new Date();
@@ -101,51 +100,54 @@ function animate() {
 
   if (pause) return;
 
-  time = time + speed;
-  var dayIdx = parseInt(time/17.5);
+  time = time + speed * direction;
+  var dayIdx = parseInt(time/10);
   date.setTime(dayIdx * 1000 * 3600 * 24 + new Date().getTime());
   dayNo.innerText = dayIdx + ' / ' + date.toLocaleDateString('en-US');
 
+  var earthOneDayAngle = time/10;
   var e_angle = time * 0.001;
-  earth.position.set(300 * Math.cos(e_angle), 300 * Math.sin(e_angle), 0);
+  var earthOrbit = getPXfromAU(fixedPlanets.earth.orbitR);
+  earth.position.set(
+    earthOrbit * Math.cos(THREE.Math.degToRad(earthOneDayAngle)),
+    earthOrbit * Math.sin(THREE.Math.degToRad(earthOneDayAngle)), 0);
 
-  var mars_angle = time * 0.001;
-  mars.position.set(500 * Math.cos(mars_angle), 500 * Math.sin(mars_angle), 0);
+  // var mars_angle = time * 0.001;
+  var marsOrbit = getPXfromAU(fixedPlanets.mars.orbitR);
+  var marsPeriodFactor = getPlanetOrbitDayAngleFactor(fixedPlanets.mars.period);
+  mars.position.set(
+    marsOrbit * Math.cos(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor)),
+    marsOrbit * Math.sin(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor)), 0);
 
   var m_angle = time * 0.01;
-  moon_orbit.rotation.set(0, 0, m_angle);
+  moon_orbit.rotation.set(0, 0, THREE.Math.degToRad(earthOneDayAngle / getPlanetOrbitDayAngleFactor(fixedPlanets.moon.period)));
 
-  var phobos_angle = time * 0.05;
-  phobos_orbit.rotation.set(0, 0, phobos_angle);
-  deimos_orbit.rotation.set(0, 0, phobos_angle * 4);
+  phobos_orbit.rotation.set(0, 0, THREE.Math.degToRad(earthOneDayAngle / getPlanetOrbitDayAngleFactor(fixedPlanets.phobos.period)));
+  deimos_orbit.rotation.set(0, 0, THREE.Math.degToRad(earthOneDayAngle / getPlanetOrbitDayAngleFactor(fixedPlanets.deimos.period)));
 
   var asteroids_angel = time * 0.001;
   asteroidsIds.forEach(function(id, index){
     var asteroidOnOrbit = scene.getObjectById(id)
-    var orbitR = 570 + getRandomWithSave(-30, 40, id);
+    var orbitR = getPXfromAU(asteroids[index].orbitR)// + getRandomWithSave(-20, 40, id);
     var asteroidRadius = asteroidOnOrbit.geometry.parameters.radius;
-    var angle = time * 0.1 / asteroidRadius * 30 + 365 / asteroidsIds.length * index; // avg spread elements on orbit
+    var angle = earthOneDayAngle / getPlanetOrbitDayAngleFactor(asteroids[index].period)
+      + 365 / asteroidsIds.length * index; // avg spread elements on orbit
     var x = orbitR * Math.cos(THREE.Math.degToRad(angle));
     var y = orbitR * Math.sin(THREE.Math.degToRad(angle));
     asteroidOnOrbit.position.set(x, y, 0);
-
 
     if (!asteroidBars[id]) {
       var sphereBarMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF });
       var sphereBar = new THREE.SphereGeometry(asteroidRadius, 10, 10);
       var sphereBar = new THREE.Mesh(sphereBar, sphereBarMaterial);
       asteroidBars[id] = sphereBar
-      scene.add(sphereBar)
+      // scene.add(sphereBar)
     }
     asteroidBars[id].position.set(x + 80, y, 0);
-
-
   });
 }
-var asteroidBars = {}
+var asteroidBars = {};
 animate();
-
-
 
 var stars = new THREE.Geometry();
 while (stars.vertices.length < 1e4) {
@@ -168,6 +170,7 @@ document.addEventListener("keydown", function (event) {
   if (code == 67) changeCamera(); // C
   if (code == 32) changeCamera(); // Space
   if (code == 80) pause = !pause; // P
+  if (code == 192) direction *= -1; // ~ reverse
   if (code == 49) speed = 1; // 1
   if (code == 50) speed = 2; // 2
   if (code == 51) speed = 10; // 3
@@ -203,6 +206,17 @@ function getRandomWithSave(min, max, id) {
   return _.memoize(function(id) { return getRandomInt(min, max) }, () => id)()
 }
 
+function getPlanetSize(planetSizeR) {
+  return parseInt(earthPXSizeR * planetSizeR / fixedPlanets.earth.sizeR, 10)
+}
+
+function getPlanetOrbitDayAngleFactor(period) {
+  return period / fixedPlanets.earth.period
+}
+
+function getPXfromAU(au) {
+  return parseInt(au * 150, 10);
+}
 
 $(function() {
   $('.order-button').click(function(){
