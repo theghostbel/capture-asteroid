@@ -235,8 +235,7 @@ function getPXfromAU(au) {
 }
 
 $(function() {
-  $('.order-button').click(function(){
-    $('.screen').fadeOut(500)
-    $('.why-you-need').fadeIn(500)
+  $('.nav-second-level a').click(function(){
+    $('.title').html( $(this).html() ).addClass('open')
   });
 });
