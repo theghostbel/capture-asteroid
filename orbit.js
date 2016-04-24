@@ -1,6 +1,8 @@
 // This is where stuff in our game will happen:
 var scene = new THREE.Scene();
 var focusedItemXY = {x: 0, y: 0};
+var followAsteroid = false;
+var followAsteroidId = null;
 
 var renderer = new THREE.WebGLRenderer();
 // This is what sees the stuff:
@@ -31,20 +33,17 @@ scene.add(ambient);
 
 var sunlight = new THREE.PointLight(0xffffff, 10, 1000);
 sun.add(sunlight);
-var planets = [];
 var nrOfPlanets = 1;
+
 var asteroidsIds = []
-asteroids.forEach(function (asteroid) {
-  console.log(asteroid)
-  var surface = new THREE.MeshPhongMaterial({color: asteroid.color || 0x222222});
-  var radius = asteroid.radius || getRandomInt(5, 30);
-  var planet = new THREE.SphereGeometry(radius, 10, 10);
-  var planet = new THREE.Mesh(planet, surface);
+dataset.forEach(function (asteroid) {
+  var surface = new THREE.MeshPhongMaterial({ color: asteroid.color || 0x222222 });
+  var radius = getPlanetSize(asteroid.size * 5);
+  var geo = new THREE.SphereGeometry(radius < 5 ? 5 : radius, 10, 10);
+  var item = new THREE.Mesh(geo, surface);
 
-  asteroidsIds.push(planet.id)
-
-  planets.push(planet);
-  scene.add(planet);
+  asteroidsIds.push(item.id)
+  scene.add(item);
 });
 
 console.log(asteroidsIds)
@@ -128,13 +127,26 @@ function animate() {
   var asteroids_angel = time * 0.001;
   asteroidsIds.forEach(function(id, index){
     var asteroidOnOrbit = scene.getObjectById(id)
-    var orbitR = getPXfromAU(asteroids[index].orbitR)// + getRandomWithSave(-20, 40, id);
+    var orbitR = getPXfromAU(dataset[index].distance)// + getRandomWithSave(-20, 40, id);
     var asteroidRadius = asteroidOnOrbit.geometry.parameters.radius;
-    var angle = earthOneDayAngle / getPlanetOrbitDayAngleFactor(asteroids[index].period)
+    // console.log(id, index, orbitR)
+    var angle = earthOneDayAngle / getPlanetOrbitDayAngleFactor(dataset[index].period)
       + 365 / asteroidsIds.length * index; // avg spread elements on orbit
+
+
     var x = orbitR * Math.cos(THREE.Math.degToRad(angle));
     var y = orbitR * Math.sin(THREE.Math.degToRad(angle));
     asteroidOnOrbit.position.set(x, y, 0);
+
+    if (followAsteroid) {
+      if (followAsteroidId === id) {
+        above_cam.position.x = x;
+        above_cam.position.y = y;
+      }
+    } else {
+      above_cam.position.x = 0;
+      above_cam.position.y = 0;
+    }
 
     if (!asteroidBars[id]) {
       var sphereBarMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF });
@@ -143,8 +155,9 @@ function animate() {
       asteroidBars[id] = sphereBar
       // scene.add(sphereBar)
     }
-    asteroidBars[id].position.set(x + 80, y, 0);
+    // asteroidBars[id].position.set(x + 80, y, 0);
   });
+
 }
 var asteroidBars = {};
 animate();
@@ -168,7 +181,10 @@ document.addEventListener("keydown", function (event) {
   var code = event.which || event.keyCode;
 
   if (code == 67) changeCamera(); // C
-  if (code == 32) changeCamera(); // Space
+  if (code == 32) {
+    console.log('switch camera')
+    followAsteroid = !followAsteroid;
+  } // Space
   if (code == 80) pause = !pause; // P
   if (code == 192) direction *= -1; // ~ reverse
   if (code == 49) speed = 1; // 1
@@ -235,7 +251,27 @@ function getPXfromAU(au) {
 }
 
 $(function() {
+  $('.factor-value').text( $('.factor').val() / 100 )
+  $('.factor').on('change', function(){
+    $('.factor-value').text( $('.factor').val() / 100 )
+  })
+
+  $('.scale-value').text( $('.scale').val() / 100 )
+  $('.scale').on('change', function(){
+    scale = $('.scale').val()
+  });
+
   $('.nav-second-level a').click(function(){
     $('.title').html( $(this).html() ).addClass('open')
+
+    var type = $(this).data('type')
+    var factor = $('.factor').val() / 100;
+
+    console.log(type)
+
+    asteroidsIds.forEach(function(asteroidIdOnScene, index) {
+      var sceneObj = scene.getObjectById(asteroidIdOnScene);
+      sceneObj.visible = dataset[index][type] > factor
+    })
   });
 });
