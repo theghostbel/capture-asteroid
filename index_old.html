@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            color: white;
+        }
+
+        .order-button {
+            cursor: pointer;
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            border: 1px solid #26759E;
+            box-shadow: #FEFFFF 0px 1px 3px inset;
+            border-radius: 7px;
+            font-size: 45px;
+            font-family: comic sans, comic sans ms, sans-serif;
+            padding: 10px 10px 10px 10px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+            color: #05142E;
+            background: #3093C7 linear-gradient(to bottom, #3093C7, #1C5A85);
+        }
+
+        .order-button:hover {
+            background: #3093C7 linear-gradient(to bottom, #33b1f0, #2686c4);
+        }
+
+        .why-you-need {
+            display: none;
+        }
+    </style>
+</head>
+<body lang="en">
+<div class="order-button">Order asteroid</div>
+<p style="color: white">Day# <span id="day"></span></p>
+
+<button style="display: none" class="draw-line">Draw line</button>
+
+<div class="why-you-need screen">
+    <h3>Select asteroid purpose:</h3>
+    <ol>
+        <li>Platinum, Nikel, Palladium</li>
+        <li>Fuel: H<sub>2</sub>0, Methane, Ammonia</li>
+        <li>Terraforming of Mars</li>
+        <li>Orbit station</li>
+        <li>Far orbit fuel station</li>
+    </ol>
+</div>
+
+<div style="height: 90%; width: 100%;" id="container" class="screen"></div>
+
+<script src="./jquery-2.2.3.js"></script>
+<script src="./underscore.js"></script>
+<script src="./moment.min.js"></script>
+<script src="./three.js"></script>
+<script src="./asteroids.js"></script>
+
+<!-- main logic -->
+<script src="./orbit.js"></script>
+</body>
+</html>
