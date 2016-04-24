@@ -21,6 +21,10 @@
         color: white;
     }
     .height100 { height: 100%;}
+    h4.title {
+        position: absolute; top: -50px; left: 50%; transform: translateX(50%); transition: all 2s;
+    }
+    h4.title.open { top: 10px; transform: translateX(-50%); }
 </style>
 
 
@@ -33,29 +37,29 @@
                 <ul class="nav" id="side-menu">
                     <li>
                         <a href="#">Select asteroid purpose<span class="fa arrow"></span></a>
-
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"> Platinum, Nikel, Palladium</a>
+                                <a href="#" class="platinum">Platinum, Nikel, Palladium</a>
                             </li>
                             <li>
-                                <a href="#">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
+                                <a href="#" class="fuel">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
                             </li>
                             <li>
-                                <a href="#">Terraforming of Mars</a>
+                                <a href="#" class="terraforming">Terraforming of Mars</a>
                             </li>
                             <li>
-                                <a href="#">Orbit station</a>
+                                <a href="#" class="orbit">Orbit station</a>
                             </li>
                             <li>
-                                <a href="#">Far orbit fuel station</a>
+                                <a href="#" class="far-orbit-fuel">Far orbit fuel station</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-9 height100">
+        <div class="col-md-9 height100" style="position: relative">
+            <h4 class="title">Platinum, Nikel, Palladium</h4>
             <div style="height: 100%; width: 100%;" id="container" class="screen"></div>
         </div>
     </div>
