@@ -1,4 +1,4 @@
-#### S3.14STEROID - Snatching Asteroids since 2016
+#### S3.14STEROID - Snatching Asteroids Since 2016
 
 [NASA Space Apps Challenge 2016. Asteroid Mining.](https://2016.spaceappschallenge.org/challenges/solar-system/asteroid-mining/projects/s3.14steroid)
 
