@@ -1,3 +1,17 @@
+#### S3.14STEROID - Snatching Asteroids since 2016
+
+[NASA Space Apps Challenge 2016. Asteroid Mining.](https://2016.spaceappschallenge.org/challenges/solar-system/asteroid-mining/projects/s3.14steroid)
+
+Milky Way, Solar System, Pirate Station Earth, Minsk, Belarus.
+
+#### Concepts
+
+[Main Paper](doc/paper.pdf)
+
+[Operation Blueprints](doc/blueprint.pdf)
+
+#### Artifacts
+
 [Asteroid finder](http://theghostbel.github.io/capture-asteroid/) - app to find asteroid by params in Solar system with Earth/Mars/Asteroids belt
 
 Phisics simulations of changing the orbit of asteroid
