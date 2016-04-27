@@ -25,15 +25,53 @@
         position: absolute; top: -50px; left: 50%; transform: translateX(50%); transition: all 2s;
     }
     h4.title.open { top: 10px; transform: translateX(-50%); }
+    input[type="range"].factor { margin: auto 15px; width: 80%; }
+    .factor-value { font-weight: bold; }
+
 </style>
 
 
 <body>
-<div class="container-fluid height100">
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand project-name" href="#" data-toggle="collapse" data-target="#navbar">Choose mission</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar" href="#" data-type="platinum">Platinum, Nikel, Palladium</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar" href="#" data-type="fuel">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar" href="#" data-type="terraforming">Terraforming of Mars</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar" href="#" data-type="orbit">Orbit station</a>
+                </li>
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar" href="#" data-type="fuel">Far orbit fuel station</a>
+                </li>
+                <li>
+                    <a>Search threshold: <span class="factor-value"></span></a>
+                    <input class="factor" type="range" min="1" max="100" value="50"/>
+                </li>
+            </ul>
+    </div>
+</nav>
+<div class="container height100">
     <div class="row height100">
         <div class="col-md-3">
             <p style="color: white">Day# <span id="day"></span></p>
-            <div class="sidebar-nav">
+            <div class="sidebar-nav" style="display: none;">
                 <ul class="nav" id="side-menu">
                     <li>
                         <a href="#">Select asteroid purpose<span class="fa arrow"></span></a>
@@ -56,8 +94,6 @@
                         </ul>
                     </li>
                 </ul>
-                <input class="factor" type="range" min="1" max="100" value="50"/>
-                <span>Value: <span class="factor-value"></span></span>
 
                 <!--<input class="scale" type="range" min="1" max="10" value="1"/>-->
                 <!--<span>Value: <span class="scale-value"></span></span>-->

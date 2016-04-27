@@ -1,4 +1,4 @@
-var earthPXSizeR = 50;
+var earthPXSizeR = 30;
 var fixedPlanets = {
   sun: { sizeR: 1392000, orbitR: 0, period: 0 },
   earth: { sizeR: 6378, orbitR: 1, period: 365 },
