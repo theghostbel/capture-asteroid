@@ -33,20 +33,17 @@ scene.add(ambient);
 
 var sunlight = new THREE.PointLight(0xffffff, 10, 1000);
 sun.add(sunlight);
-var nrOfPlanets = 1;
 
-var asteroidsIds = []
+var asteroidsIds = [];
 dataset.forEach(function (asteroid) {
   var surface = new THREE.MeshPhongMaterial({ color: asteroid.color || 0x222222 });
   var radius = getPlanetSize(asteroid.size * 5);
   var geo = new THREE.SphereGeometry(radius < 5 ? 5 : radius, 10, 10);
   var item = new THREE.Mesh(geo, surface);
 
-  asteroidsIds.push(item.id)
+  asteroidsIds.push(item.id);
   scene.add(item);
 });
-
-console.log(asteroidsIds)
 
 var surfaceMars = new THREE.MeshPhongMaterial({color: 0xFF1111});
 var marsGeo = new THREE.SphereGeometry(getPlanetSize(fixedPlanets.mars.sizeR), 20, 15);
@@ -126,13 +123,12 @@ function animate() {
 
   var asteroids_angel = time * 0.001;
   asteroidsIds.forEach(function(id, index){
-    var asteroidOnOrbit = scene.getObjectById(id)
-    var orbitR = getPXfromAU(dataset[index].distance)// + getRandomWithSave(-20, 40, id);
+    var asteroidOnOrbit = scene.getObjectById(id);
+    var orbitR = getPXfromAU(dataset[index].distance);
     var asteroidRadius = asteroidOnOrbit.geometry.parameters.radius;
     // console.log(id, index, orbitR)
     var angle = earthOneDayAngle / getPlanetOrbitDayAngleFactor(dataset[index].period)
-      + 365 / asteroidsIds.length * index; // avg spread elements on orbit
-
+      + 365 / asteroidsIds.length * index;
 
     var x = orbitR * Math.cos(THREE.Math.degToRad(angle));
     var y = orbitR * Math.sin(THREE.Math.degToRad(angle));
@@ -152,7 +148,7 @@ function animate() {
       var sphereBarMaterial = new THREE.MeshBasicMaterial({color: 0x0000FF });
       var sphereBar = new THREE.SphereGeometry(asteroidRadius, 10, 10);
       var sphereBar = new THREE.Mesh(sphereBar, sphereBarMaterial);
-      asteroidBars[id] = sphereBar
+      asteroidBars[id] = sphereBar;
       // scene.add(sphereBar)
     }
     // asteroidBars[id].position.set(x + 80, y, 0);
@@ -221,8 +217,6 @@ document.addEventListener('click', function (event) {
 
   var line = new THREE.Line(geometry, material);
   scene.add(line);
-
-  console.log(line)
 });
 
 function changeCamera() {
@@ -232,10 +226,6 @@ function changeCamera() {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomWithSave(min, max, id) {
-  return _.memoize(function(id) { return getRandomInt(min, max) }, () => id)()
 }
 
 function getPlanetSize(planetSizeR) {
@@ -266,8 +256,6 @@ $(function() {
 
     var type = $(this).data('type')
     var factor = $('.factor').val() / 100;
-
-    console.log(type)
 
     asteroidsIds.forEach(function(asteroidIdOnScene, index) {
       var sceneObj = scene.getObjectById(asteroidIdOnScene);
