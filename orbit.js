@@ -241,20 +241,20 @@ function getPXfromAU(au) {
 }
 
 $(function() {
-  $('.factor-value').text( $('.factor').val() / 100 )
+  $('.factor-value').text( $('.factor').val() / 100 );
   $('.factor').on('change', function(){
     $('.factor-value').text( $('.factor').val() / 100 )
   })
 
-  $('.scale-value').text( $('.scale').val() / 100 )
+  $('.scale-value').text( $('.scale').val() / 100 );
   $('.scale').on('change', function(){
     scale = $('.scale').val()
   });
 
   $('.nav-second-level a').click(function(){
-    $('.title').html( $(this).html() ).addClass('open')
+    $('.title').html( $(this).html() ).addClass('open');
 
-    var type = $(this).data('type')
+    var type = $(this).data('type');
     var factor = $('.factor').val() / 100;
 
     asteroidsIds.forEach(function(asteroidIdOnScene, index) {
