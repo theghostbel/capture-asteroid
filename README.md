@@ -20,6 +20,6 @@ Milky Way, Solar System, Pirate Station Earth, Minsk, Belarus.
 
 [![short_impulse](http://img.youtube.com/vi/mwSNx3kNXdc/0.jpg)](https://www.youtube.com/watch?v=mwSNx3kNXdc)
 
- *  using weak continuous impulse simulation (solar sails)](https://www.youtube.com/watch?v=1OB3MKc2lu8)
+ *  using weak continuous impulse simulation (solar sails)
 
-![Philae](https://media.giphy.com/media/yoJC2u6vQ5bwZlAHGo/giphy.gif)
+[![continuous_impulse](http://img.youtube.com/vi/1OB3MKc2lu8/0.jpg)](https://www.youtube.com/watch?v=1OB3MKc2lu8)
