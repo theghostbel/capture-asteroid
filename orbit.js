@@ -24,7 +24,7 @@ container.appendChild(renderer.domElement);
 document.body.style.backgroundColor = 'black';
 
 var surface = new THREE.MeshPhongMaterial({ color: 0xFFD700 });
-var star = new THREE.SphereGeometry(getPlanetSize(fixedPlanets.sun.sizeR / 500), 28, 21);
+var star = new THREE.SphereGeometry(getPlanetSize(fixedPlanets.sun.sizeR / 400), 28, 21);
 var sun = new THREE.Mesh(star, surface);
 scene.add(sun);
 
@@ -51,7 +51,7 @@ var mars = new THREE.Mesh(marsGeo, surfaceMars);
 scene.add(mars);
 
 var surfacePhobos = new THREE.MeshPhongMaterial({color: 0xffffff});
-var phobos = new THREE.SphereGeometry(6, 30, 25);
+var phobos = new THREE.SphereGeometry(5, 30, 25);
 var phobos = new THREE.Mesh(phobos, surfacePhobos);
 
 var phobos_orbit = new THREE.Object3D();
@@ -59,7 +59,7 @@ phobos_orbit.add(phobos);
 phobos.position.set(0, 50, 0);
 
 var surfaceDeimos = new THREE.MeshPhongMaterial({color: 0xffffff});
-var deimos = new THREE.SphereGeometry(12, 30, 25);
+var deimos = new THREE.SphereGeometry(8, 30, 25);
 var deimos = new THREE.Mesh(deimos, surfaceDeimos);
 var deimos_orbit = new THREE.Object3D();
 deimos_orbit.add(deimos);
@@ -74,13 +74,13 @@ var earth = new THREE.Mesh(planet, surface);
 scene.add(earth);
 
 var surface = new THREE.MeshPhongMaterial({ color: 0xDDDDDD });
-var planet = new THREE.SphereGeometry(15, 30, 25);
-var moon = new THREE.Mesh(planet, surface);
+var moon = new THREE.SphereGeometry(15, 30, 25);
+var moon = new THREE.Mesh(moon, surface);
 
 var moon_orbit = new THREE.Object3D();
 earth.add(moon_orbit);
 moon_orbit.add(moon);
-moon.position.set(0, getPXfromAU(fixedPlanets.moon.orbitR * 50), 0);
+moon.position.set(0, getPXfromAU(fixedPlanets.moon.orbitR * 30), 0);
 earth_cam.rotation.set(Math.PI / 2, 0, 0);
 moon_orbit.add(earth_cam);
 
@@ -112,8 +112,8 @@ function animate() {
   var marsOrbit = getPXfromAU(fixedPlanets.mars.orbitR);
   var marsPeriodFactor = getPlanetOrbitDayAngleFactor(fixedPlanets.mars.period);
   mars.position.set(
-    marsOrbit * Math.cos(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor)),
-    marsOrbit * Math.sin(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor)), 0);
+    marsOrbit * Math.cos(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor + 180)),
+    marsOrbit * Math.sin(THREE.Math.degToRad(earthOneDayAngle / marsPeriodFactor + 180)), 0);
 
   var m_angle = time * 0.01;
   moon_orbit.rotation.set(0, 0, THREE.Math.degToRad(earthOneDayAngle / getPlanetOrbitDayAngleFactor(fixedPlanets.moon.period)));

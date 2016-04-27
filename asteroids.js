@@ -1,11 +1,11 @@
 var earthPXSizeR = 30;
 var fixedPlanets = {
   sun: { sizeR: 1392000, orbitR: 0, period: 0 },
-  earth: { sizeR: 6378, orbitR: 1, period: 365 },
-  moon: { sizeR: 1737, orbitR: 0.01613, period: 30 },
+  earth: { sizeR: 6378 * 0.8, orbitR: 1, period: 365 },
+  moon: { sizeR: 1737 * 0.5, orbitR: 0.01613, period: 30 },
   phobos: { period: 7.39/24 * 10 },
   deimos: { period: 30/24 * 10 },
-  mars: { sizeR: 3389, orbitR: 1.52, period: 686.2 }
+  mars: { sizeR: 3389 * 0.8, orbitR: 1.52, period: 686.2 }
 };
 
 var fossils = {
