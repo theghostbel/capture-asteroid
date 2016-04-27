@@ -14,7 +14,9 @@ Milky Way, Solar System, Pirate Station Earth, Minsk, Belarus.
 
 [Asteroid finder](http://theghostbel.github.io/capture-asteroid/) - app to find asteroid by params in Solar system with Earth/Mars/Asteroids belt
 
-Phisics simulations of changing the orbit of asteroid
+Physical simulation of changing orbit of an asteroid
+
+![short_impulse](https://raw.githubusercontent.com/theghostbel/capture-asteroid/master/doc/change_orbit_-_short-impulse.webp)
 
 [by relatively short impulse simulation](https://www.youtube.com/watch?v=mwSNx3kNXdc)
 
