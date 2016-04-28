@@ -1,4 +1,0 @@
-# Contributors
-
-* Victor Rusakovich 
-* TBD...
