@@ -20,6 +20,9 @@ var camera = above_cam;
 renderer.setSize(container.offsetWidth, container.offsetHeight);
 container.appendChild(renderer.domElement);
 
+var order_panel = document.getElementById('panel-order');
+order_panel.style.width=container.offsetWidth+"px";
+
 // ******** START CODING ON THE NEXT LINE ********
 document.body.style.backgroundColor = 'black';
 
