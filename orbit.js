@@ -251,7 +251,8 @@ $(function() {
     scale = $('.scale').val()
   });
 
-  $('.nav-second-level a').click(function(){
+  // Purpose buttons click handler
+  $('a.purpose-btn').click(function(){
     $('.title').html( $(this).html() ).addClass('open');
 
     var type = $(this).data('type');
