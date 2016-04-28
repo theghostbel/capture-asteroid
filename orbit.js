@@ -254,6 +254,10 @@ $(function() {
     scale = $('.scale').val()
   });
 
+  $('#container').click(function() {
+      $('#panel-order').show();
+  });
+    
   // Purpose buttons click handler
   $('a.purpose-btn').click(function(){
     $('.title').html( $(this).html() ).addClass('open');
