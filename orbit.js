@@ -262,5 +262,7 @@ $(function() {
       var sceneObj = scene.getObjectById(asteroidIdOnScene);
       sceneObj.visible = dataset[index][type] > factor
     })
+    
+    return false;
   });
 });

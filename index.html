@@ -52,22 +52,30 @@
     .factor-value {
         font-weight: bold;
     }
+    
+    .purpose-btn {
+        text-transform: uppercase;
+        color: white;
+        margin-top: 0.5em;
+    }
 
 </style>
 
 
 <body>
-<a class="btn purpose-btn" href="#" data-type="platinum">Platinum, Nikel, Palladium</a>
-<a class="btn purpose-btn" href="#" data-type="fuel">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
-<a class="btn purpose-btn" href="#" data-type="terraforming">Terraforming of Mars</a>
-<a class="btn purpose-btn" href="#" data-type="orbit">Orbit station</a>
-<a class="btn purpose-btn" href="#" data-type="fuel">Far orbit fuel station</a>
-<p style="color: white" class="day-counter">Day# <span id="day"></span></p>
-<div>
-    <a>Search threshold: <span class="factor-value"></span></a>
+
+<div style="height: 100%; width: 100%; margin-bottom:1em;" id="container" class="screen"></div>
+    
+<a class="btn btn-primary purpose-btn" href="#" data-type="platinum">Platinum, Nikel, Palladium</a>
+<a class="btn btn-primary purpose-btn" href="#" data-type="fuel">Fuel: H<sub>2</sub>0, Methane, Ammonia</a>
+<a class="btn btn-primary purpose-btn" href="#" data-type="terraforming">Terraforming of Mars</a>
+<a class="btn btn-primary purpose-btn" href="#" data-type="orbit">Orbit station</a>
+<a class="btn btn-primary purpose-btn" href="#" data-type="fuel">Far orbit fuel station</a>
+<p style="color: white; display: none;" class="day-counter">Day# <span id="day"></span></p>
+<div style="margin-top: 0.5em; margin-bottom: 2em;">
+    <a style="color: white;">Search threshold: <span class="factor-value"></span></a>
     <input class="factor" type="range" min="1" max="100" value="50"/>
 </div>
-<div style="height: 100%; width: 100%;" id="container" class="screen"></div>
 
 <script src="./jquery-2.2.3.js"></script>
 <!--<script src="./js/bootstrap.js"></script>-->
