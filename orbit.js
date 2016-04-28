@@ -7,7 +7,8 @@ var followAsteroidId = null;
 var renderer = new THREE.WebGLRenderer();
 // This is what sees the stuff:
 var container = document.getElementById('container');
-var aspect_ratio = container.offsetWidth / container.offsetHeight;
+//var aspect_ratio = container.offsetWidth / container.offsetHeight;
+var aspect_ratio = document.body.clientWidth / document.body.clientHeight;
 var above_cam = new THREE.PerspectiveCamera(45, aspect_ratio, 1, 1e6);
 above_cam.position.z = 1500;
 scene.add(above_cam);
@@ -17,7 +18,8 @@ var earth_cam = new THREE.PerspectiveCamera(45, aspect_ratio, 1, 1e6);
 var camera = above_cam;
 
 // This will draw what the camera sees onto the screen:
-renderer.setSize(container.offsetWidth, container.offsetHeight);
+//renderer.setSize(container.offsetWidth, container.offsetHeight);
+renderer.setSize(document.body.clientWidth, document.body.clientHeight);
 container.appendChild(renderer.domElement);
 
 //var order_panel = document.getElementById('panel-order');
