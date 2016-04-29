@@ -7,9 +7,9 @@ function setCarouselSize() {
     
     if (wHeight > wWidth) {        
         var containerHeight = originalImageHeight * wWidth / originalImageWidth;   
-        $('#carousel-example-generic').height(containerHeight);
+        $('#carousel-widget').height(containerHeight);
     } else {
-        $('#carousel-example-generic').height($(window).height()-$('#panel-title').height());
+        $('#carousel-widget').height($(window).height()-$('#panel-title').height());
     }
 }
 
