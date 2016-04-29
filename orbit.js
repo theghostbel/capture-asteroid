@@ -20,6 +20,9 @@ var camera = above_cam;
 renderer.setSize(container.offsetWidth, container.offsetHeight);
 container.appendChild(renderer.domElement);
 
+var order_panel = document.getElementById('panel-order');
+order_panel.style.width=container.offsetWidth+"px";
+
 // ******** START CODING ON THE NEXT LINE ********
 document.body.style.backgroundColor = 'black';
 
@@ -251,6 +254,10 @@ $(function() {
     scale = $('.scale').val()
   });
 
+  $('#container').click(function() {
+      $('#panel-order').show();
+  });
+    
   // Purpose buttons click handler
   $('a.purpose-btn').click(function(){
     $('.title').html( $(this).html() ).addClass('open');
@@ -262,5 +269,7 @@ $(function() {
       var sceneObj = scene.getObjectById(asteroidIdOnScene);
       sceneObj.visible = dataset[index][type] > factor
     })
+    
+    return false;
   });
 });
