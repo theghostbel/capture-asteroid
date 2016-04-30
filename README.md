@@ -10,6 +10,8 @@ Milky Way, Solar System, Pirate Station Earth, Minsk, Belarus.
 
 [Operation Blueprints](doc/blueprint.pdf)
 
+[Comics describing the project](capture-asteroid/cartoon.html)
+
 #### Artifacts
 
 [Asteroid finder](http://theghostbel.github.io/capture-asteroid/) - app to find asteroid by params in Solar system with Earth/Mars/Asteroids belt
